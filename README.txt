@@ -1,20 +1,25 @@
-<<<<<<< HEAD
 Using Maven:
 
-mvn run:jetty
+mvn run:tomcat
 
-will start the jetty web server. Then set the browser to http://localhost:9500/comcast/<partnerId>
+will start the tomcat web server. 
 
-To add advertising partner data, there are two client user interfaces, within the com/wpmassociates/exercise/client package, one from the command line, one a graphical client. Each is run by clicking on the class name, then right clicking on the mouse to select Run As, then selecting "Java application" as the option. The command line client prompts for the user id, duration (in days) and the ad content from the command line. The graphical client generates a window where there are input boxes for partner id, duration and ad content, plus a Send button to send the data to the server.
-=======
-Should be able to insert ad.war into a local web server, e.g., Tomcat, then a browser is run and the address bar of a browser is set to http://localhost:8080/ad
+To add data to the database, there are two client user interfaces, within the com/wpmassociates/comcast/client package, one from the command line, one a graphical client. 
+These can be run from the command line:
 
-To run the application from Tomcat, there are two client user interfaces, within the com/wpmassociates/exercise/client package, one from the command line, one a graphical client. Each is run by clicking on the class name, then right clicking on the mouse to select Run As, then selecting "Java application" as the option. The command line client prompts for the user id, duration (in days) and the ad content from the command line. The graphical client generates a window where there are input boxes for partner id, duration and ad content, plus a Send button to send the data to the server.
+mvn exec:java -Dexec.mainClass=com.wpmassociates.comcast.client.HttpClientRequestCommandLine or ...HttpClientRequestGraphicalInterface
 
-To check for a given partner id a browser is opened, then the URL and the partner id are entered into the address box. Assuming localhost: http://localhost:8080/ad/<partnerId>. That will return either the JSON code for that partner id or some other message, if there is an error, as plain text in the browser window.
+Or from an IDE:
 
-Alternatively, the code should be downloadable through git to be placed in an Eclipse IDE, then compiled and run through a server instance (e.g. Tomcat) in the IDE. A browser is then opened and pointed to the url listed above.
->>>>>>> 906e33ad5714c9e61bae95676c24df6c9715000e
+Click on the class name, then right clicking on the mouse to select Run As, then selecting "Java application" as the option. The command line client prompts for:
+
+the user id
+duration (in days)
+text
+
+The graphical client generates a window where there are input boxes for partner id, duration and text, plus a Send button to send the data to the server.
+
+To check for a given partner id a browser is opened, then the URL and the partner id are entered into the address box. Assuming localhost: http://localhost:8080/comcast/<partnerId>. That will return either the JSON code for that partner id or some other message, if there is an error, as plain text in the browser window.
 
 There is a default.properties file within the src/main/resources directory that contains key/values to determine whether the application should use a SQL database (in this case MySQL) or use an in-memory database. 
 
@@ -37,21 +42,10 @@ enter password:<password> <press enter key>
 
 Then set the key/values in the default.properties, as follows, before running the application server:
 
-<<<<<<< HEAD
-databaseName=json		leave as is
-=======
 databaseName=json	leave as is
->>>>>>> 906e33ad5714c9e61bae95676c24df6c9715000e
+
 useMap=no			value must be "no"
 dbUsername=<username>		enter username value that works on local server
 dbPassword=<password>		enter password value that works on local server
 mysqlUrl=jdbc:mysql://localhost:3306	leave as is, default port for mysql
-<<<<<<< HEAD
-driverName=com.mysql.jdbc.Driver 	leave as is
-
- 
-=======
 driverName=com.mysql.jdbc.Driver		leave as is
-
- 
->>>>>>> 906e33ad5714c9e61bae95676c24df6c9715000e
