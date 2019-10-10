@@ -1,0 +1,49 @@
+<<<<<<< HEAD
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+  version="3.1"
+  metadata-complete="true">
+ <description>Manages advertising content for advertising partners. Partners are identified by an integer. Data are stored for the partner includes date of start of ad campaign, duration in days of campaign and the content for the ad campaign.</description>
+   <display-name>Ad servlet example</display-name>
+  <servlet>
+	<servlet-name>AdServlet</servlet-name>
+	<servlet-class>com.wpmassociates.comcast.servlets.AdServlet</servlet-class>
+	 <load-on-startup>1</load-on-startup>
+ </servlet>
+
+	<servlet-mapping>
+		<servlet-name>AdServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>   
+ </web-app>
+
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <description>Manages advertising content for advertising partners. Partners are identified by an integer. Data are stored for the partner includes date of start of ad campaign, duration in days of campaign and the content for the ad campaign.</description>
+ <display-name>Advertising content application</display-name>
+
+ <filter>
+   <filter-name>Get Filter</filter-name>
+   <filter-class>com.wpmassociates.exercise.filters.GetFilter</filter-class>
+</filter>
+
+ <filter-mapping>
+   <filter-name>Get Filter</filter-name>
+   <servlet-name>adservlet</servlet-name>
+</filter-mapping>
+
+ <servlet>
+  <servlet-name>adservlet</servlet-name>
+  <servlet-class>com.wpmassociates.exercise.servlets.AdServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>adservlet</servlet-name>
+  <url-pattern>/*</url-pattern>
+ </servlet-mapping>
+
+</web-app>
+>>>>>>> 906e33ad5714c9e61bae95676c24df6c9715000e
