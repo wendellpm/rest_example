@@ -1,42 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-<<<<<<< HEAD
+
   <groupId>com.wpmassociates.comcast</groupId>
   <artifactId>comcast</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>comcast web application</name>
   <url>http://maven.apache.org</url>
-  <properties>
+
+	<properties>
 		<jdk.version>1.8</jdk.version>
-	</properties>
-	<dependencies>
-			
-=======
-  <groupId>com.wpmassociates.exercise</groupId>
-  <artifactId>ad</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>ad web application</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-		<jdk.version>1.8</jdk.version>
-		<jetty.version>9.2.11.v20150529</jetty.version>
-		<!-- git hub properties
-		<gitHubRepository>wendellpm/exercise</gitHubRepository>
+		<gitHubRepository>wendellpm/rest_example</gitHubRepository>
 		<gitHubUserName>wendellpm</gitHubUserName>
 		<gitHubPassword>modica1970</gitHubPassword>
 		<github.global.server>github</github.global.server>	
-		-->
+	
 	</properties>
+	
 	<dependencies>
-		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-catalina</artifactId>
-			<version>8.0.33</version>
-		</dependency>
->>>>>>> 906e33ad5714c9e61bae95676c24df6c9715000e
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -81,97 +63,30 @@
 		</dependency>
 	</dependencies>
   	<build>
-<<<<<<< HEAD
 		<finalName>comcast</finalName>
+
 		<plugins>
 
-=======
-		<finalName>ad</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>false</downloadJavadocs>
-					<wtpversion>2.0</wtpversion>
-				</configuration>
-			</plugin>
->>>>>>> 906e33ad5714c9e61bae95676c24df6c9715000e
 			<!-- JDK Compiler -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-<<<<<<< HEAD
 				<version>3.1</version>
-=======
-				<version>2.3.2</version>
->>>>>>> 906e33ad5714c9e61bae95676c24df6c9715000e
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-<<<<<<< HEAD
-			<!--
-<plugin>
-        <groupId>org.mortbay.jetty</groupId>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>8.1.2.v20120308</version>
-        <configuration>
-          <scanIntervalSeconds>10</scanIntervalSeconds>
-          <webApp>
-            <contextPath>/comcast</contextPath>
-          </webApp>
-        </configuration>
-      </plugin>
-
-
--->
-
-=======
-			<!-- Maven Jetty -->
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty.version}</version>
-				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
-					<webApp>
-						<contextPath>/ad</contextPath>
-					</webApp>
-					<httpConnector>
-						<port>8080</port>
-					</httpConnector>
-				</configuration>
-			</plugin>
-
-			<!-- Maven Tomcat plugin
->>>>>>> 906e33ad5714c9e61bae95676c24df6c9715000e
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-<<<<<<< HEAD
 					<url>http://localhost:8080</url>
 					<server>TomcatServer</server>
 					<path>/comcast/*</path>
 				</configuration>
-			</plugin>	
-
-=======
-					<webApp>
-						<contextPath>/ad</contextPath>
-					</webApp>
-					<httpConnector>
-						<port>8080</port>
-					</httpConnector>
-				</configuration>
-			</plugin>	
-			 -->
->>>>>>> 906e33ad5714c9e61bae95676c24df6c9715000e
+			</plugin>
 		</plugins>
 	</build>
 </project>
