@@ -13,26 +13,28 @@ import com.wpmassociates.comcast.constants.Constants;
 
 public class HttpClientRequestCommandLine {
 	
-	private static Logger logger = Logger.getLogger(HttpClientRequestCommandLine.class.getName());
+	private static final Logger logger = Logger.getLogger(HttpClientRequestCommandLine.class.getName());
+	
+	private static final Scanner scanner = new Scanner(in);
 	
 	public static void main(String...inputs) {
-		String[] keys = {Constants.DURATION, Constants.PARTNERID, Constants.ADCONTENT};
-		Scanner scanner = null;
-		int partnerId = 0;
-		int duration = 0;
+		out.println("Enter data, after each entry press the [Enter] key");
+		String partnerId = null;
+		String duration = null;
 		String adContent = null;
-		Map<String, String> partnerAd = new TreeMap<String, String>(CommonCode.getComparator());
-		scanner = new Scanner(in);
-		out.print("Enter partnerId ");
-		partnerId = scanner.nextInt();
-		out.print("Enter duration as days ");
-		duration = scanner.nextInt();
-		out.print("Enter ad content ");
+		out.println("Partner id ");
+		partnerId = scanner.next();
+		out.println("Length in days that text active ");
+		duration = scanner.next();
+		out.println("Text ");
 		adContent = scanner.next();
+		Map<String, String> partnerAd = new TreeMap<String, String>(CommonCode.getComparator());
+		String[] keys = {Constants.DURATION, Constants.PARTNERID, Constants.ADCONTENT};
 		partnerAd.put(keys[2], adContent);
-		partnerAd.put(keys[1], String.valueOf(partnerId));
-		partnerAd.put(keys[0], String.valueOf(duration));
+		partnerAd.put(keys[1], partnerId);
+		partnerAd.put(keys[0], duration);
 		scanner.close();
+		
 		Set<String> keySet = partnerAd.keySet();
 		for (String key : keySet) 
 			logger.info("Key " + key + " value " + partnerAd.get(key));

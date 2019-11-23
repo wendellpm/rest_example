@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletContext;
 
-
 import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,26 +26,7 @@ public class AdServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		checkHeaders(request, "GET");
 		service = new AdService();
-		printWriter = response.getWriter();
-		String uri = request.getRequestURI();
-		String validated = Validator.checkInput(uri);
-		response.setContentType("text/plain,charset=UTF-8");
-		int partnerInteger = 0;
-		String responseString = null;
-		switch (validated) {
-			case Constants.NOT_CONTEXT:
-			printWriter.write(validated);
-			break;
-
-			case Constants.NOT_NUMERIC:
-			printWriter.write(validated);	
-			break;
-
-			default:
-			partnerInteger = Integer.parseInt(validated);
-			responseString = service.retrieveData(partnerInteger);
-			printWriter.write(responseString);
-		}
+		validateGETInput(response, request);
 	}
 	
 	@Override
@@ -59,14 +39,7 @@ public class AdServlet extends HttpServlet {
 		BufferedReader reader = request.getReader();
 		response.setContentType("text/plain,charset=UTF-8");
 		result = service.processData(reader);
-		if (result.getResult().equals("exists")) 
-			logger.info(Constants.ALREADY_EXISTS + result.getPartnerId());
-		else if (result.getResult().equals("added"))
-			logger.info(Constants.ADDED + result.getPartnerId());
-		else if (result.getResult().equals("problem"))
-			logger.info(Constants.NOT_ADDED + result.getPartnerId());
-		else if (result.getResult().equals(Constants.NOT_NUMERIC))
-			logger.info(Constants.NOT_NUMERIC + result.getPartnerId());
+		createResponse(result, response);
 	}
 	
 	private void checkHeaders(HttpServletRequest request, String method) throws IOException {
@@ -90,8 +63,47 @@ public class AdServlet extends HttpServlet {
 			}
 		}
 		else return;
-	
 	}
+	
+	private void createResponse(PersistenceResult result, HttpServletResponse response) {
+		String resultValue = result.getResult();
+		String id = result.getPartnerId();
+		switch (resultValue) {
+			case Constants.EXISTS:
+			response.setHeader("Response", HttpServletResponse.SC_CONFLICT + " " + Constants.ALREADY_EXISTS + " " + id);
+			break;
+			
+			case Constants.ID_ADDED:
+			response.setHeader("Response", HttpServletResponse.SC_OK + " " + Constants.ADDED + " " + id);
+			break;
+		
+			default:
+			response.setHeader("Response", HttpServletResponse.SC_INTERNAL_SERVER_ERROR + " unknown problem, but " + Constants.NOT_ADDED + " " + id);
+			break;
+		}
+	}
+	
+	private void validateGETInput(HttpServletResponse response, HttpServletRequest request) throws IOException {
+	
+		printWriter = response.getWriter();
+		String uri = request.getRequestURI();
+		String validated = Validator.checkInput(uri);
+		response.setContentType("text/plain,charset=UTF-8");
+		int partnerInteger = 0;
+		String responseString = null;
+		switch (validated) {
+			case Constants.NOT_CONTEXT:
+			printWriter.write(validated);
+			break;
 
+			case Constants.NOT_NUMERIC:
+			printWriter.write(validated);	
+			break;
 
+			default:
+			partnerInteger = Integer.parseInt(validated);
+			responseString = service.retrieveData(partnerInteger);
+			printWriter.write(responseString);
+		}
+	}
  }

@@ -1,6 +1,7 @@
 package com.wpmassociates.comcast.client;
  
 import org.apache.http.HttpResponse;
+import org.apache.http.Header;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 
@@ -87,8 +88,12 @@ public class CommonCode {
 				result.append(line);
 			}
 		} catch (IOException exception) {}
-		StatusLine statusLine = response.getStatusLine();
-		return result.toString() + "code " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase();
+		Header header = response.getFirstHeader("Response");
+		if (header != null) 
+			return header.getValue();
+		else 
+			return "Value for header key \"Response\" is missing";
+		// return result.toString() + "code " + statusLine.getStatusCode() + " " + statusLine.getReasonPhrase();
 	}
 
 	public static Comparator<String> getComparator() {

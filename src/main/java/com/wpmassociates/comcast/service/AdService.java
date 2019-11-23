@@ -37,7 +37,6 @@ public class AdService {
 			logger.info("Log to database");
 			persist = new StoreInDatabase(properties);
 		}
-
 	}	
 	
 	public String retrieveData(int partnerId) {

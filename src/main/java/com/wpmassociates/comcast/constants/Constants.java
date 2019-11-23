@@ -6,6 +6,8 @@ public interface Constants {
 	final String NO_RECORD = "No record for partner identifier";
 	final int ID_LOCATION = 9;
 	final String ALREADY_EXISTS = "Partner already exists with id ";
+	final String EXISTS = "exists";
+	final String ID_ADDED = "added";
 	final String ADDED = "Partner added with id ";
 	final String NOT_ADDED = "Partner not added with id ";
 	final String NOT_NUMERIC = "Partner id must be numeric ";

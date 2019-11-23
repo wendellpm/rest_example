@@ -121,10 +121,8 @@ public class StoreInDatabase implements StoreData {
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet != null)
 				exists = (resultSet.first());
-		} catch (SQLException exception){
-			exception.getMessage();
-		} 
 		logger.info("Exists is " + exists);
+		} catch (SQLException exception) {}   
 	   	return exists;
 	}
 	
