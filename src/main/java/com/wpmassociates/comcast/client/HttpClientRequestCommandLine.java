@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.io.IOException;
 import static java.lang.System.in;
 import static java.lang.System.out;
+import java.util.regex.Pattern;
 
 import com.wpmassociates.comcast.constants.Constants;
 
@@ -19,6 +20,7 @@ public class HttpClientRequestCommandLine {
 	
 	public static void main(String...inputs) {
 		out.println("Enter data, after each entry press the [Enter] key");
+		
 		String partnerId = null;
 		String duration = null;
 		String adContent = null;
@@ -27,7 +29,10 @@ public class HttpClientRequestCommandLine {
 		out.println("Length in days that text active ");
 		duration = scanner.next();
 		out.println("Text ");
+		scanner.useDelimiter("\r\n");
 		adContent = scanner.next();
+		out.println("POST enter 1, PUT enter 2 ");
+		int method = scanner.nextInt();
 		Map<String, String> partnerAd = new TreeMap<String, String>(CommonCode.getComparator());
 		String[] keys = {Constants.DURATION, Constants.PARTNERID, Constants.ADCONTENT};
 		partnerAd.put(keys[2], adContent);
@@ -39,7 +44,34 @@ public class HttpClientRequestCommandLine {
 		for (String key : keySet) 
 			logger.info("Key " + key + " value " + partnerAd.get(key));
 		
-		String response = CommonCode.makePostRequest(partnerAd);
+		String response = null;
+		
+		switch(method) {
+			case 1:
+			response = CommonCode.makePostRequest(partnerAd);
+			break;
+			
+			case 2:
+			response = CommonCode.makePutRequest(partnerAd);
+			break;
+			
+			default:
+			break;
+		}
 		logger.info("Response is " + response);
+	}
+	
+	public enum Method {
+			PUT("put"), POST("post"), GET("get"), DELETE("delete");
+		
+			private String property = null;
+			
+			public String getProperty() {
+				return property;
+			}
+			
+			Method(String property) {
+				this.property = property;
+			}		
 	}
 }

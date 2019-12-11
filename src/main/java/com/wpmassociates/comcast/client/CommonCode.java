@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.log4j.Logger;
 import org.apache.http.client.HttpClient;
@@ -77,6 +78,28 @@ public class CommonCode {
 		}
 		return null;
 	}
+	
+	public static String makePutRequest(Map<String, String> partnerAd) {
+		try {
+			String jsonString = new GsonBuilder().create().toJson(partnerAd, Map.class);
+			HttpPut httpPut = new HttpPut(URL);
+			httpPut.setEntity(new StringEntity(jsonString));
+			httpPut.setHeader("Accept", "application/json");
+			httpPut.setHeader("Content-type", "application/json");
+			httpPut.setHeader("Connection", "keep-alive");
+			HttpClient client = new DefaultHttpClient();
+			HttpResponse httpResponse = client.execute(httpPut);
+			return handleResponse(httpResponse);
+		} catch (ClientProtocolException exception) {
+			exception.printStackTrace();
+		} catch (UnsupportedEncodingException exception) {
+			exception.printStackTrace();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		}
+		return null;
+	}
+	
 	
 	public static String handleResponse(HttpResponse response) { 
 		StringBuffer result = null;

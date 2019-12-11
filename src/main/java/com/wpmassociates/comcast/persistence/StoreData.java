@@ -1,6 +1,7 @@
 package com.wpmassociates.comcast.persistence;
 
 import java.util.Properties;
+import javax.servlet.http.HttpSession;
 
 import com.wpmassociates.comcast.domain.*;
 

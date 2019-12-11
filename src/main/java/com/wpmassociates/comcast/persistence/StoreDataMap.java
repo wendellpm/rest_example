@@ -45,7 +45,7 @@ public class StoreDataMap implements StoreData {
 	
 
 	public boolean storeData(int partnerId, JSONMapStorageObject storageObject) {
-		logger.info("Partner id " + partnerId + " object " + storageObject.toString());
+		logger.debug("Partner id " + partnerId + " object " + storageObject.toString());
 		storageMap.put(partnerId, storageObject);
 		JSONMapStorageObject object = storageMap.get(partnerId);
 		logger.info("Data stored " + object.getPartnerId());

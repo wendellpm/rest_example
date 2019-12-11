@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import org.apache.log4j.Logger;
 import java.util.Enumeration;
+import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpSession;
 
 import com.wpmassociates.comcast.validation.*;
 import com.wpmassociates.comcast.constants.*;
@@ -21,10 +23,30 @@ public class AdServlet extends HttpServlet {
 	private PrintWriter printWriter;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private AdService service = null;
-	
+	private int integerValue = 0;
+	private boolean isInteger = false;
+	private HttpSession session = null;
+
+	@Override
+	public void init() {
+		ServletContext context = getServletConfig().getServletContext();
+		logger.debug("Call init method. Show context parameters");
+		logger.debug("Name\tValue\tis integer");
+		Enumeration<String> enumeration = context.getInitParameterNames();
+		while (enumeration.hasMoreElements()) {
+				String name = enumeration.nextElement();
+				String value = context.getInitParameter(name);
+				if (value.matches("[0-9]+")) {
+					isInteger = true;
+					integerValue = Integer.parseInt(value);
+				}
+				logger.debug(name + "\t" + value + "\tInteger\t" + isInteger);		
+		}
+	}
+
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		checkHeaders(request, "GET");
+		// checkHeaders(request, "GET");
 		service = new AdService();
 		validateGETInput(response, request);
 	}
@@ -32,14 +54,25 @@ public class AdServlet extends HttpServlet {
 	@Override
 	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		checkHeaders(request, "POST");
-		service = new AdService();
-		PersistenceResult result = null;
-		printWriter = response.getWriter();
-		BufferedReader reader = request.getReader();
-		response.setContentType("text/plain,charset=UTF-8");
-		result = service.processData(reader);
-		createResponse(result, response);
+		// checkHeaders(request, "POST");
+		getServletContext().setAttribute("period", integerValue);
+		session = request.getSession();
+		session.setAttribute("post", "value for post");
+		performServiceCall(request, response);
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// checkHeaders(request, "PUT");
+		performServiceCall(request, response);
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// checkHeaders(request, "DELETE");
+		performServiceCall(request, response);
 	}
 	
 	private void checkHeaders(HttpServletRequest request, String method) throws IOException {
@@ -106,4 +139,20 @@ public class AdServlet extends HttpServlet {
 			printWriter.write(responseString);
 		}
 	}
+	
+	private void performServiceCall(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		service = new AdService();
+		PersistenceResult result = null;
+		printWriter = response.getWriter();
+		BufferedReader reader = request.getReader();
+		HttpSession session = request.getSession();
+		session.setAttribute("performanceCall", "this is the value for attribute");
+		String attributeValue = (String)session.getAttribute("performanceCall");logger.debug("Session attribute value is now " + attributeValue);
+		session.setAttribute("performanceCall", "change value of attribute");
+		attributeValue = (String)session.getAttribute("performanceCall");
+		logger.debug("Session attribute value change to " + attributeValue);
+		response.setContentType("text/plain,charset=UTF-8");
+		result = service.processData(reader);
+		createResponse(result, response);
+	}			
  }

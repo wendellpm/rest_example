@@ -16,4 +16,6 @@ public interface Constants {
 	final String ADCONTENT = "ad_content";
 	final String COMCAST = "/comcast";
 	final String NOT_CONTEXT = "Context root must be /comcast";
+	final String YES = "yes";
+	final String NO = "no";
   }

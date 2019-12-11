@@ -2,6 +2,7 @@ com\wpmassociates\comcast\domain\PersistenceResult.class
 com\wpmassociates\comcast\servlets\ContextAttributeListener.class
 com\wpmassociates\comcast\client\HttpClientRequestGraphicalInterface$1.class
 com\wpmassociates\comcast\client\HttpClientRequestGraphicalInterface$2.class
+com\wpmassociates\comcast\client\HttpClientRequestCommandLine$Method.class
 com\wpmassociates\comcast\persistence\StoreDataMap.class
 com\wpmassociates\comcast\constants\Constants.class
 com\wpmassociates\comcast\domain\JSONMapStorageObject.class

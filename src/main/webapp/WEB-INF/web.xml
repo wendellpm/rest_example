@@ -7,6 +7,22 @@
   metadata-complete="true">
  <description>Manages advertising content for advertising partners. Partners are identified by an integer. Data are stored for the partner includes date of start of ad campaign, duration in days of campaign and the content for the ad campaign.</description>
    <display-name>Ad servlet example</display-name>
+    <context-param>
+		<param-name>First context parameter</param-name>
+		<param-value>10</param-value>
+   </context-param>
+   <context-param>
+		<param-name>Second context parameter</param-name>
+		<param-value>20</param-value>
+   </context-param>
+
+    <listener>
+        <listener-class>com.wpmassociates.comcast.servlets.ContextAttributeListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>com.wpmassociates.comcast.servlets.SessionListener</listener-class>
+    </listener>
+	<load-on-startup>1</load-on-startup>
   <servlet>
 	<servlet-name>AdServlet</servlet-name>
 	<servlet-class>com.wpmassociates.comcast.servlets.AdServlet</servlet-class>

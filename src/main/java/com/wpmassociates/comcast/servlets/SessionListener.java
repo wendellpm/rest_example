@@ -14,7 +14,11 @@ public class SessionListener implements HttpSessionAttributeListener {
 
 	private DateFormat formatter = null;
 
-	private Logger logger = Logger.getLogger(this.getClass().getName());
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+	
+	{
+		logger.debug("In SessionListener class");
+	}
 	
 	@Override
 	public void attributeAdded(HttpSessionBindingEvent event) {

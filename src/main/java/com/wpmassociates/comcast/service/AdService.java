@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import javax.servlet.http.HttpSession;
+
 import java.io.InputStream;
 import java.util.Properties;
 import org.apache.log4j.Logger;
@@ -30,7 +32,7 @@ public class AdService {
 	public AdService() {
 
 		useMap = properties.getProperty("useMap");
-		if (useMap.equals("yes")) {
+		if (useMap.equals(Constants.YES)) {
 			logger.info("Log to in memory map");
 			persist = StoreDataMap.getInstance();
 		} else {
